@@ -1,25 +1,33 @@
-import logo from './logo.svg';
+import React, { useEffect, Grid } from 'react'
+import { Container } from 'react-dom';
+import axios from 'axios'
 import './App.css';
+import timer from './Components/timer'
 
-function App() {
+
+
+function Index() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    useEffect(async () => {
+
+      const baseURL = `https://api.coindesk.com/v1/bpi/currentprice.json`
+      console.log('Enocta')
+      await axios(baseURL).then(async data => {
+        console.log(data)
+      }).catch(err => console.log("Hatanız : ", err));
+    }
+      , [])
   );
 }
 
-export default App;
+export default Index
+
+
+function App(props) {
+    return (
+      <Container justify-content="center">
+      <Grid item><timer /></Grid> 
+      </Container>
+    );
+
+}
